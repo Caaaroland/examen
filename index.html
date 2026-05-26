@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>examenC_20007863</title>
+    
+    <link rel="manifest" href="./manifest.json">
+    
+    <style>
+        /* Variables CSS para facilitar el cambio de temas */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --primary-color: #0056b3;
+            --secondary-color: #e9ecef;
+            --hover-color: #007bff;
+            --border-radius: 8px;
+        }
+
+        /* Variables para el Modo Oscuro */
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --primary-color: #4da3ff;
+            --secondary-color: #333333;
+            --hover-color: #80bdff;
+        }
+
+        /* Estilos Globales y Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Diseño Responsivo y Contenedores */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        h2 { margin-bottom: 15px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; }
+
+        /* Botones Generales */
+        button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        button:hover { transform: scale(1.05); background-color: var(--hover-color); }
+        
+        /* Imágenes */
+        img.logo-empresa { max-width: 150px; display: block; margin-bottom: 10px; }
+        img.logo-galileo { max-width: 100px; display: block; margin-top: 10px; }
+
+        /* Formulario */
+        form { display: flex; flex-direction: column; gap: 15px; }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            width: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Enlaces Multimedia */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .link-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease; /* Transición CSS3 */
+        }
+        /* Efecto Hover obligatorio para Enlaces */
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            color: var(--primary-color);
+        }
+
+        /* Canvas */
+        canvas {
+            border: 2px dashed var(--primary-color);
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+            background-color: var(--bg-color);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        #coordsDisplay { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="btnTema">Cambiar a Modo Oscuro</button>
+    </header>
+
+    <section id="Bienvenida" class="container">
+        <h2>Bienvenida</h2>
+        <img class="logo-empresa" src="https://static.wixstatic.com/media/c3c2db_478be877259b4e06ad11c61406aee323~mv2.png" alt="Logotipo Prevención">
+        <p><strong>Nuestra Misión:</strong> Promover la seguridad integral y el bienestar en nuestras instalaciones a través de la prevención y la tecnología.</p>
+        <br>
+        <p id="textoNorma"><strong>Norma de Seguridad:</strong> Utilice siempre su equipo de protección personal en las áreas operativas.</p>
+        <br>
+        <button id="btnLeerNorma">Leer Norma en Voz Alta</button>
+    </section>
+
+    <section id="Tienda" class="container">
+        <h2>Reporte de Incidentes (Tienda/Área)</h2>
+        <form id="formIncidente">
+            <label for="inputArea">Área del Incidente:</label>
+            <input type="text" id="inputArea" placeholder="Ej. Almacén, Tienda 1...">
+            
+            <label for="inputIncidente">Descripción del Incidente:</label>
+            <input type="text" id="inputIncidente" placeholder="Describa el incidente brevemente...">
+            
+            <button type="submit">Enviar Reporte</button>
+        </form>
+    </section>
+
+    <section id="Enlaces" class="container">
+        <h2>Enlaces de Interés</h2>
+        <div class="links-grid">
+            <a href="https://diegoespana1997.wixsite.com/perlas-de-yogur-arte" target="_blank" class="link-card">Sitio en Wix (T14)</a>
+            <a href="https://www.youtube.com/watch?v=b4-MQIou5Lw" target="_blank" class="link-card">Video en YouTube</a>
+            <a href="#" class="link-card">Redes Sociales (T15)</a>
+            
+            <a href="https://www.galileo.edu/" target="_blank" class="link-card">
+                Página Universidad Galileo
+                <img class="logo-galileo" src="https://i.ibb.co/0Vnt0dtv/unnamed.jpg" alt="Logo Universidad Galileo">
+            </a>
+        </div>
+    </section>
+
+    <section id="Salida" class="container">
+        <h2>Información de Salida</h2>
+        
+        <h3>Ubicación Actual</h3>
+        <button id="btnGeo">Capturar mi Ubicación</button>
+        <p id="coordsDisplay">Tus coordenadas aparecerán aquí.</p>
+
+        <hr style="margin: 20px 0; border: 1px solid var(--secondary-color);">
+
+        <h3>Autoría</h3>
+        <p>Carné: 20007863</p>
+        <canvas id="miCanvas" width="300" height="100"></canvas>
+    </section>
+
+    <script>
+        // a) Alternar Modo Claro/Oscuro
+        const btnTema = document.getElementById('btnTema');
+        btnTema.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                btnTema.textContent = "Cambiar a Modo Claro";
+            } else {
+                btnTema.textContent = "Cambiar a Modo Oscuro";
+            }
+        });
+
+        // b) Web Speech API (Lectura de la norma)
+        const btnLeerNorma = document.getElementById('btnLeerNorma');
+        const textoNorma = document.getElementById('textoNorma').innerText;
+        btnLeerNorma.addEventListener('click', () => {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(textoNorma);
+                utterance.lang = 'es-ES'; // Idioma Español
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Tu navegador no soporta la Web Speech API.");
+            }
+        });
+
+        // c) Validación de Formulario (JS)
+        const formIncidente = document.getElementById('formIncidente');
+        formIncidente.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita recargar la página
+            const area = document.getElementById('inputArea').value.trim();
+            const incidente = document.getElementById('inputIncidente').value.trim();
+
+            if (area === '' || incidente === '') {
+                alert("Error: Por favor, llena todos los campos (Área e Incidente) antes de enviar.");
+            } else {
+                alert(`¡Reporte enviado con éxito!\nÁrea: ${area}\nIncidente: ${incidente}`);
+                formIncidente.reset(); // Limpia el formulario
+            }
+        });
+
+        // d) API de Geolocalización de HTML5
+        const btnGeo = document.getElementById('btnGeo');
+        const coordsDisplay = document.getElementById('coordsDisplay');
+        btnGeo.addEventListener('click', () => {
+            if ('geolocation' in navigator) {
+                coordsDisplay.textContent = "Obteniendo coordenadas...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        coordsDisplay.textContent = `Latitud: ${lat.toFixed(5)}, Longitud: ${lon.toFixed(5)}`;
+                    },
+                    (error) => {
+                        coordsDisplay.textContent = "Error al obtener la ubicación. Permisos denegados o función no disponible.";
+                    }
+                );
+            } else {
+                coordsDisplay.textContent = "La geolocalización no es compatible con este navegador.";
+            }
+        });
+
+        // e) Canvas (Dibujar el primer nombre dinámicamente)
+        window.addEventListener('load', () => {
+            const canvas = document.getElementById('miCanvas');
+            if (canvas.getContext) {
+                const ctx = canvas.getContext('2d');
+                
+                // Fondo del canvas dinámico
+                ctx.fillStyle = "#e9ecef";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Texto: Primer nombre "Luis"
+                ctx.font = "bold 40px 'Segoe UI', Arial, sans-serif";
+                ctx.fillStyle = "#0056b3"; // Color primario
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("Luis", canvas.width / 2, canvas.height / 2);
+            }
+        });
+
+        // Registro del Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Fallo al registrar el Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
